@@ -1,10 +1,41 @@
 import React from 'react'
 import {AiFillDelete} from "react-icons/ai"
+import { useDispatch, useSelector } from 'react-redux';
 const Cart = () => {
+  const { cartItems} = useSelector(state=>state.cart);
+  const dispatch =useDispatch();
+
+  const increment=(id)=>{
+    dispatch({
+      type: "addToCart",
+      payload:id,
+    });
+  };
+  const decrement=(id)=>{};
+  const deleteHandler=(id)=>{};
   return (
     <div className='cart'>
         <main>
-        <CartItem />
+{
+  cartItems.length > 0 ?(
+    cartItems.map(i=>(
+      <CartItem 
+      imgSrc={i.imgSrc}
+      name= {i.name}
+      price={i.price}
+      qty={i.quantity}
+      id={i.id}
+      key={i.id}
+      decrement={decrement}
+      increment={increment}
+      deleteHandler={deleteHandler}
+      />
+    ))
+  ) : (
+    <h1>No Items yet</h1>
+  )
+}
+
         </main>
         <aside>
             <h2>Subtotal: ${2000}</h2>
