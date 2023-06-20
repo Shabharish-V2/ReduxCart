@@ -22,7 +22,8 @@ const Home = () => {
 ];
 const dispatch = useDispatch()
 const addToCartHandler = (options) => {
-    dispatch({type:"addToCart",payload:options})
+    dispatch({type:"addToCart",payload:options});
+    dispatch({type: "calculatePrice"});
     toast.success("added to cart");
 
 };
